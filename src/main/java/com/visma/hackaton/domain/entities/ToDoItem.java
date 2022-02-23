@@ -24,7 +24,7 @@ public class ToDoItem {
     @Column(name = "description", length = 500)
     public String description;
 
-    @Column(name = "is_done", columnDefinition = "boolean default false")
+    @Column(name = "is_done", nullable = false, columnDefinition = "boolean default false")
     public boolean isDone;
 
     @ManyToOne
