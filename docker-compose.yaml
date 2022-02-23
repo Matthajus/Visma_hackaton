@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  db:
+    container_name: visma_hackaton
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: visma_hackaton
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: toor
+    ports:
+      - '2200:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:
