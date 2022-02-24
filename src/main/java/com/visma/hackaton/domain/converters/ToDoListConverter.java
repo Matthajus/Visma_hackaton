@@ -1,5 +1,6 @@
 package com.visma.hackaton.domain.converters;
 
+import com.visma.hackaton.domain.dto.ToDoListBaseDto;
 import com.visma.hackaton.domain.dto.ToDoListDto;
 import com.visma.hackaton.domain.entities.ToDoList;
 import org.mapstruct.Mapper;
@@ -10,5 +11,7 @@ public interface ToDoListConverter {
     ToDoListDto toDto(ToDoList toDoList);
 
     ToDoList fromDto(ToDoListDto toDoListDto);
+
+    ToDoListBaseDto toBaseDto(ToDoList toDoList);
 
 }
