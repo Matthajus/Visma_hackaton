@@ -1,7 +1,6 @@
 package com.visma.hackaton.services;
 
 import com.visma.hackaton.domain.converters.ToDoListConverter;
-import com.visma.hackaton.domain.dto.ToDoListBaseDto;
 import com.visma.hackaton.domain.dto.ToDoListDto;
 import com.visma.hackaton.domain.entities.ToDoList;
 import com.visma.hackaton.exceptions.ConflictException;
@@ -10,25 +9,32 @@ import com.visma.hackaton.repositories.ToDoListRepository;
 import com.visma.hackaton.services.interfaces.IToDoListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class ToDoListService implements IToDoListService {
 
     private final ToDoListRepository toDoListRepository;
     private final ToDoListConverter converter;
 
-    @Override
-    public List<ToDoListBaseDto> getAllToDoLists() {
-        List<ToDoList> lists = toDoListRepository.findAll();
-        return lists.stream().map(converter::toBaseDto).collect(Collectors.toList());
+    public ToDoListService(ToDoListRepository toDoListRepository, ToDoListConverter converter) {
+        this.toDoListRepository = toDoListRepository;
+        this.converter = converter;
     }
 
     @Override
-    public ToDoListDto saveToDoList(ToDoListDto listToSave) {
+    @Transactional
+    public List<ToDoListDto> getAllToDoLists() {
+        List<ToDoList> lists = toDoListRepository.findAll();
+        return lists.stream().map(converter::toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public ToDoListDto saveToDoList(@Valid ToDoListDto listToSave) {
         // check for duplicity
         ToDoList exist = toDoListRepository.findToDoListByName(listToSave.getName());
         if (exist != null)

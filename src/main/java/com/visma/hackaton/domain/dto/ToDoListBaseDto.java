@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
-@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Data
 @NoArgsConstructor
 public class ToDoListBaseDto {
 
