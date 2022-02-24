@@ -16,15 +16,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ToDoListService implements IToDoListService {
 
     private final ToDoListRepository toDoListRepository;
     private final ToDoListConverter converter;
-
-    public ToDoListService(ToDoListRepository toDoListRepository, ToDoListConverter converter) {
-        this.toDoListRepository = toDoListRepository;
-        this.converter = converter;
-    }
 
     @Override
     @Transactional

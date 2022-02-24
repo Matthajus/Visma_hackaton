@@ -8,7 +8,7 @@ public interface IToDoItemService {
 
     List<ToDoItemDto> getAllToDoItems();
 
-    ToDoItemDto saveToDoItem(ToDoItemDto itemToSave);
+    ToDoItemDto saveToDoItem(ToDoItemDto itemToSave, long listId);
 
     ToDoItemDto getToDoItemById(long id);
 
@@ -16,5 +16,5 @@ public interface IToDoItemService {
 
     ToDoItemDto updateToDoItem(ToDoItemDto toDoItemDto, long id);
 
-    ToDoItemDto markAsDone(ToDoItemDto toDoItemDto, long id);
+    void markAsDone(ToDoItemDto toDoItemDto, long id);
 }
