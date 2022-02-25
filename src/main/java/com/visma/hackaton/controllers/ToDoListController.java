@@ -1,7 +1,9 @@
 package com.visma.hackaton.controllers;
 
+import com.visma.hackaton.domain.dto.ToDoItemDto;
 import com.visma.hackaton.domain.dto.ToDoListBaseDto;
 import com.visma.hackaton.domain.dto.ToDoListDto;
+import com.visma.hackaton.services.ToDoItemService;
 import com.visma.hackaton.services.ToDoListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -42,5 +44,5 @@ public class ToDoListController {
         toDoListService.deleteToDoList(id);
         return new ResponseEntity<>("ToDoList deleted successfully!", HttpStatus.NO_CONTENT);
     }
-
+    
 }

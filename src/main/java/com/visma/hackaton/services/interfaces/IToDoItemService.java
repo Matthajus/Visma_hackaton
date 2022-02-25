@@ -16,5 +16,4 @@ public interface IToDoItemService {
 
     ToDoItemDto updateToDoItem(ToDoItemDto toDoItemDto, long id);
 
-    void markAsDone(ToDoItemDto toDoItemDto, long id);
 }
