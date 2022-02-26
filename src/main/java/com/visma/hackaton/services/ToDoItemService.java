@@ -52,6 +52,12 @@ public class ToDoItemService implements IToDoItemService {
     }
 
     @Override
+    public List<ToDoItemDto> getAllToDoItemsByListId(long id) {
+        List<ToDoItem> items = toDoItemRepository.findAllByToDoListId(id);
+        return items.stream().map(converter::toDto).collect(Collectors.toList());
+    }
+
+    @Override
     @Transactional
     public void deleteToDoItem(long id) {
         // check if exists

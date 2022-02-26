@@ -1,7 +1,6 @@
 package com.visma.hackaton.controllers;
 
 import com.visma.hackaton.domain.dto.ToDoItemDto;
-import com.visma.hackaton.domain.dto.ToDoListDto;
 import com.visma.hackaton.services.ToDoItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,6 +12,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/todoitems")
+@CrossOrigin(origins = "http://localhost:8081/")
 public class ToDoItemController {
 
     private final ToDoItemService toDoItemService;
@@ -22,15 +22,20 @@ public class ToDoItemController {
         return toDoItemService.getAllToDoItems();
     }
 
+    @GetMapping("{id}")
+    public List<ToDoItemDto> getAllItemsByListId(@PathVariable("id") long listId) {
+        return toDoItemService.getAllToDoItemsByListId(listId);
+    }
+
     @PostMapping("{id}")
     public ResponseEntity<ToDoItemDto> saveItemToList(@PathVariable("id") long listId, @RequestBody ToDoItemDto toDoItemDto) {
         return new ResponseEntity<>(toDoItemService.saveToDoItem(toDoItemDto, listId), HttpStatus.CREATED);
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<ToDoItemDto> getToDoItemById(@PathVariable("id") long id) {
-        return new ResponseEntity<>(toDoItemService.getToDoItemById(id), HttpStatus.OK);
-    }
+//    @GetMapping("{id}")
+//    public ResponseEntity<ToDoItemDto> getToDoItemById(@PathVariable("id") long id) {
+//        return new ResponseEntity<>(toDoItemService.getToDoItemById(id), HttpStatus.OK);
+//    }
 
     @PutMapping("{id}")
     public ResponseEntity<ToDoItemDto> updateToDoItem(@PathVariable("id") long id, @RequestBody ToDoItemDto toDoItemDto) {
